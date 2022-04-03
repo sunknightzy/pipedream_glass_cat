@@ -5,7 +5,7 @@ export default {
     key: 'DEV_DISCORD_SEND_MESSAGE',
     name: '发送消息 ClassCat开发版',
     description: '给 Discord 简单的消息或者富文本消息',
-    version: '1.0.0',
+    version: '0.0.1',
     type: 'action',
     props: {
         ...common.props,
