@@ -3,7 +3,7 @@ import puppeteer from 'puppeteer-core'
 export default {
     key: 'DEV_TRADINGVIEW_SCREENSHOT',
     name: 'TradingView截图 ClassCat开发版',
-    version: '0.0.2',
+    version: '0.0.6',
     type: 'action',
     props: {
         browserless: {
@@ -54,7 +54,7 @@ export default {
             label: 'Image Height',
             description: '浏览器高度,单位像素,决定图片清晰度',
             optional: false,
-            default: 2560,
+            default: 1600,
         },
         waitTime: {
             type: 'integer',
@@ -63,6 +63,30 @@ export default {
                 '单位: 秒,等待图片生成的时间,因为TradingView服务器生成图片需要一点时间,未生成之前去访问会报403',
             optional: false,
             default: 2,
+        },
+        resetChart: {
+            type: 'boolean',
+            label: 'Reset Chart',
+            description:
+                '截图前重置图表缩放，默认：false',
+            optional: false,
+            default: false,
+        },
+        rightMargin: {
+            type: 'integer',
+            label: 'Right Margin',
+            description:
+                '最近的K线需要往左调整多少根K线的距离',
+            optional: false,
+            default: 1,
+        },
+        zoomOutTimes: {
+            type: 'integer',
+            label: 'Zoom Out Times',
+            description:
+                '图表放大几次，默认不放大',
+            optional: false,
+            default: 0,
         },
     },
     async run({$}) {
@@ -117,6 +141,9 @@ export default {
             browserWidth,
             browserHeight,
             waitTime,
+            resetChart,
+            rightMargin,
+            zoomOutTimes,
         } = this
         try {
             puppeteer.defaultArgs({
@@ -167,21 +194,29 @@ export default {
                 await page.waitForSelector('.input-GT7Z98Io')
                 await page.click('.input-GT7Z98Io')
             }
+            if (resetChart === true) {
+                // await page.click('.price-axis')
+                // ALT + R 快捷键 重置图表为 默认 K线宽度和坐标系自动缩放 auto scale
+                await page.keyboard.down('AltLeft')
+                await page.keyboard.press('KeyR')
+                await page.keyboard.up('AltLeft')
+            }
             // 重新聚焦图表
             await page.keyboard.press('Escape');
-            // 图表放大快捷键 Ctrl + ↑
-            await page.keyboard.down('ControlLeft')
-            await page.keyboard.press('ArrowUp')
-            await page.keyboard.press('ArrowUp')
-            await page.keyboard.press('ArrowUp')
-            await page.keyboard.press('ArrowUp')
-            await page.keyboard.up('ControlLeft')
-            // 快捷键调整第一个K线和坐标右侧的距离，单位为K线的根数
-            await page.keyboard.press('ArrowRight')
-            await page.keyboard.press('ArrowRight')
-            await page.keyboard.press('ArrowRight')
-            await page.keyboard.press('ArrowRight')
-            await page.keyboard.press('ArrowRight')
+            if (zoomOutTimes || zoomOutTimes > 0) {
+                // 图表放大快捷键 Ctrl + ↑
+                await page.keyboard.down('ControlLeft')
+                for (let i = 0; i < zoomOutTimes; i++) {
+                    await page.keyboard.press('ArrowUp')
+                }
+                await page.keyboard.up('ControlLeft')
+            }
+            if (rightMargin || rightMargin > 0) {
+                for (let i = 0; i < rightMargin; i++) {
+                    // 快捷键调整第一个K线和坐标右侧的距离，单位为K线的根数
+                    await page.keyboard.press('ArrowRight')
+                }
+            }
             const retrievedData = await page.evaluate(() => {
                 return this._exposed_chartWidgetCollection.takeScreenshot()
             })
