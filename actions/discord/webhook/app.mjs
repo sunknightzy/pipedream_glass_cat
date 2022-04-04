@@ -33,7 +33,7 @@ export default {
         threadID: {
             type: 'string',
             label: 'Thread ID',
-            description: '可以指定消息发送到哪个Thread',
+            description: '子区ID,可以指定消息发送到哪个子区',
             optional: true,
         },
     },
