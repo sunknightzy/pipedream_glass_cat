@@ -3,7 +3,7 @@
 Some pipedream code for my workflow
 
 ## First of All
-Install official CLI tool  Link: https://pipedream.com/docs/cli/install/
+Install official CLI tool. [Tool  link](https://pipedream.com/docs/cli/install/)
 
 execute command ` pd login ` to login
 
