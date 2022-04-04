@@ -160,6 +160,15 @@ export default {
 
             const chartUrl = `https://www.tradingview.com/chart/${chartId}?symbol=${exchange}:${ticker}&interval=${interval}&theme=${theme}`
             await page.goto(chartUrl)
+            if (theme === 'dark') {
+                // 修改主题为dark
+                await page.waitForSelector('.menu-TOIVciIL')
+                await page.click('.menu-TOIVciIL')
+                await page.waitForSelector('.input-GT7Z98Io')
+                await page.click('.input-GT7Z98Io')
+            }
+            // 重新聚焦图表
+            await page.keyboard.press('Escape');
             // 图表放大快捷键 Ctrl + ↑
             await page.keyboard.down('ControlLeft')
             await page.keyboard.press('ArrowUp')
@@ -167,6 +176,12 @@ export default {
             await page.keyboard.press('ArrowUp')
             await page.keyboard.press('ArrowUp')
             await page.keyboard.up('ControlLeft')
+            // 快捷键调整第一个K线和坐标右侧的距离，单位为K线的根数
+            await page.keyboard.press('ArrowRight')
+            await page.keyboard.press('ArrowRight')
+            await page.keyboard.press('ArrowRight')
+            await page.keyboard.press('ArrowRight')
+            await page.keyboard.press('ArrowRight')
             const retrievedData = await page.evaluate(() => {
                 return this._exposed_chartWidgetCollection.takeScreenshot()
             })
