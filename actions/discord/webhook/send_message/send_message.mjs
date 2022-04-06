@@ -2,10 +2,10 @@ import common from '../common.mjs'
 
 export default {
   ...common,
-  key: 'DEV_DISCORD_SEND_MESSAGE',
-  name: '发送消息 ClassCat开发版',
+  key: 'DISCORD_SEND_MESSAGE',
+  name: '给Discord发送消息-RELEASE-1.0.0',
   description: '给 Discord 简单的消息或者富文本消息',
-  version: '0.0.7',
+  version: '1.0.0',
   type: 'action',
   props: {
     ...common.props,

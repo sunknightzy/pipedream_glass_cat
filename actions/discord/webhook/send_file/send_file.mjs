@@ -4,10 +4,10 @@ import fs from 'fs'
 
 export default {
   ...common,
-  key: 'DEV_DISCORD_WEBHOOK_SEND_FILE',
-  name: '给Discord发送带有附件的消息 ClassCat开发版',
+  key: 'DISCORD_SEND_FILE',
+  name: '给Discord发送附件-RELEASE-1.0.0',
   description: '发送带有附件的消息',
-  version: '0.0.7',
+  version: '1.0.0',
   type: 'action',
   props: {
     ...common.props,
