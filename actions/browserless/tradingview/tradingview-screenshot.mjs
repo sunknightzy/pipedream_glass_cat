@@ -1,4 +1,4 @@
-import puppeteer from 'puppeteer-core'
+import puppeteer from 'puppeteer-core@14.1.2'
 
 export default {
   key: 'TRADINGVIEW_SCREENSHOT',
