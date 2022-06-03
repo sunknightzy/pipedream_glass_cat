@@ -2,8 +2,8 @@ import puppeteer from 'puppeteer-core@14.1.2'
 
 export default {
   key: 'TRADINGVIEW_SCREENSHOT',
-  name: 'TradingView截图-RELEASE-1.0.1',
-  version: '1.0.1',
+  name: 'TradingView截图-RELEASE-1.0.2',
+  version: '1.0.2',
   type: 'action',
   props: {
     browserless: {
