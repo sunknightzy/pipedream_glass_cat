@@ -3,9 +3,9 @@ import common from '../common.mjs'
 export default {
   ...common,
   key: 'DISCORD_SEND_MESSAGE',
-  name: '给Discord发送消息-RELEASE-1.0.0',
+  name: '给Discord发送消息-RELEASE-1.0.1',
   description: '给 Discord 简单的消息或者富文本消息',
-  version: '1.0.0',
+  version: '1.0.1',
   type: 'action',
   props: {
     ...common.props,
