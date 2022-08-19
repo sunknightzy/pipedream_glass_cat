@@ -183,7 +183,7 @@ export default {
       // 修改主题
       // 1、展开菜单
       await page
-        .waitForSelector('div.button-TOIVciIL')
+        .waitForSelector('div.layout__area--topleft')
         .then(async (ele) => await ele.click())
         .catch((err) => console.log('click menu error, cause:', err))
       // 2、修改主题
