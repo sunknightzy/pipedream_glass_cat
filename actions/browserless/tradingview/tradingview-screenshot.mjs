@@ -1,9 +1,9 @@
-import puppeteer from 'puppeteer-core@14.1.2'
+import puppeteer from 'puppeteer-core'
 
 export default {
   key: 'TRADINGVIEW_SCREENSHOT',
-  name: 'TradingView截图-RELEASE-1.0.2',
-  version: '1.0.2',
+  name: 'TradingView截图-RELEASE-1.0.3',
+  version: '1.0.3',
   type: 'action',
   props: {
     browserless: {
@@ -183,7 +183,7 @@ export default {
       // 修改主题
       // 1、展开菜单
       await page
-        .waitForSelector('div.button-TOIVciIL')
+        .waitForSelector('div.layout__area--topleft')
         .then(async (ele) => await ele.click())
         .catch((err) => console.log('click menu error, cause:', err))
       // 2、修改主题
