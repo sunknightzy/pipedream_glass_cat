@@ -5,9 +5,9 @@ import fs from 'fs'
 export default {
   ...common,
   key: 'DISCORD_SEND_FILE',
-  name: '给Discord发送附件-RELEASE-1.0.2',
+  name: '给Discord发送附件-RELEASE-1.0.3',
   description: '发送带有附件的消息',
-  version: '1.0.2',
+  version: '1.0.3',
   type: 'action',
   props: {
     ...common.props,
